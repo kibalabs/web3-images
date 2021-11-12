@@ -1,7 +1,7 @@
 import { buildTheme, ITheme } from '@kibalabs/ui-react';
 
 const defaultTheme = buildTheme();
-export const buildNotdTheme = (): ITheme => {
+export const buildAppTheme = (): ITheme => {
   const theme = buildTheme({
     colors: {
       brandPrimary: '#6F0000',
@@ -40,7 +40,7 @@ export const buildNotdTheme = (): ITheme => {
     },
     texts: {
       default: {
-        'font-family': "'Post No Bills Jaffna', sans-serif",
+        'font-family': "'Open Sans', sans-serif",
         'font-weight': '400',
       },
       header3: {
@@ -186,14 +186,6 @@ export const buildNotdTheme = (): ITheme => {
               'border-color': 'rgba(255, 255, 255, 0.75)',
             },
           },
-        },
-      },
-    },
-    dialogs: {
-      default: {
-        backdropColor: 'rgba(0, 0, 0, 0.7)',
-        background: {
-          'background-color': '$colors.brandPrimaryDark10',
         },
       },
     },

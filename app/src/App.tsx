@@ -4,9 +4,9 @@ import { useFavicon } from '@kibalabs/core-react';
 import { Alignment, BackgroundView, Direction, Head, KibaApp, Stack, Text } from '@kibalabs/ui-react';
 
 import { GlobalsProvider } from './globalsContext';
-import { buildNotdTheme } from './theme';
+import { buildAppTheme } from './theme';
 
-const theme = buildNotdTheme();
+const theme = buildAppTheme();
 
 const globals = {
 };
@@ -25,7 +25,7 @@ export const App = (): React.ReactElement => {
       <GlobalsProvider globals={globals}>
         <BackgroundView linearGradient='#36D1DC,#1C92D2'>
           <Stack direction={Direction.Vertical} isFullWidth={true} isFullHeight={true} childAlignment={Alignment.Center} contentAlignment={Alignment.Start} isScrollableVertically={true}>
-            <Text>Web3 Images</Text>
+            <Text variant='header1'>Web3 Images</Text>
           </Stack>
         </BackgroundView>
       </GlobalsProvider>
