@@ -1,9 +1,7 @@
 import json
-import os
-from core.aws_requester import AwsRequester
 from core.exceptions import NotFoundException
 from core.util import chain_util
-from core.web3.eth_client import EthClientInterface, RestEthClient
+from core.web3.eth_client import EthClientInterface
 from ens.utils import normalize_name as ens_normalize_name
 from ens.utils import normal_name_to_hash as ens_name_to_hash
 
