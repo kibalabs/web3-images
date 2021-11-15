@@ -13,13 +13,13 @@ export const AccountPage = (): React.ReactElement => {
         </Box>
         <Stack direction={Direction.Vertical} childAlignment={Alignment.Center} contentAlignment={Alignment.Center} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide3}>
           <Text>Our Sponsors:</Text>
-          <Stack direction={Direction.Horizontal} shouldAddGutters={true}childAlignment={Alignment.Center} paddingTop={PaddingSize.Wide2}>
+          <Stack directionResponsive={{ base: Direction.Vertical, medium: Direction.Horizontal }} shouldAddGutters={true}childAlignment={Alignment.Center} paddingTop={PaddingSize.Wide2}>
             <LinkBase variant='image' target='https://tokenhunt.io'>
               <Box width='50px' height='50px'>
-                <Image source='/assets/tokenhunt.jpg' alternativeText='token' />
+                <Image source='/assets/tokenhunt.jpg' alternativeText='Kronikz' />
               </Box>
             </LinkBase>
-            <Stack direction={Direction.Vertical}>
+            <Stack direction={Direction.Vertical} paddingRight={PaddingSize.Wide2}>
               <Text>Token Hunt</Text>
               <Text variant='normal' alignment={TextAlignment.Center}>Your daily dose of the best NFTs</Text>
             </Stack>
@@ -28,7 +28,7 @@ export const AccountPage = (): React.ReactElement => {
                 <Image source='/assets/mdtp-image.png' alternativeText='mdtp' />
               </Box>
             </LinkBase>
-            <Stack direction={Direction.Vertical}>
+            <Stack direction={Direction.Vertical}paddingRight={PaddingSize.Wide2}>
               <Text variant='normal'>Million Dollar Token Page </Text>
               <Text variant='normal' alignment={TextAlignment.Center}>The homepage for the Metaverse </Text>
             </Stack>
