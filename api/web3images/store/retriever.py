@@ -1,4 +1,3 @@
-import datetime
 from core.exceptions import NotFoundException
 
 from core.store.retriever import Retriever as CoreRetriever
