@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useNavigator } from '@kibalabs/core-react';
-import { Alignment, BackgroundView, Box, Direction, IconButton, Image, KibaIcon, LinkBase, PaddingSize, SingleLineInput, Stack, Text, TextAlignment } from '@kibalabs/ui-react';
+import { Alignment, BackgroundView, Box, Direction, IconButton, Image, KibaIcon, LinkBase, PaddingSize, SingleLineInput, Stack, Text } from '@kibalabs/ui-react';
 
 export const HomePage = (): React.ReactElement => {
   const navigator = useNavigator();
@@ -48,7 +48,7 @@ export const HomePage = (): React.ReactElement => {
             </LinkBase>
             <Stack direction={Direction.Vertical}>
               <Text>Token Hunt</Text>
-              <Text variant='normal' alignment={TextAlignment.Center}>Your daily dose of the best NFTs</Text>
+              <Text variant='normal'>Your daily dose of the best NFTs</Text>
             </Stack>
             <LinkBase variant='image' target='https://milliondollartokenpage.com'>
               <Box width='50px' height='50px'>
@@ -56,8 +56,8 @@ export const HomePage = (): React.ReactElement => {
               </Box>
             </LinkBase>
             <Stack direction={Direction.Vertical}>
-              <Text variant='normal' alignment={TextAlignment.Center}>Million Dollar Token Page </Text>
-              <Text variant='normal' alignment={TextAlignment.Center}>The homepage for the Metaverse </Text>
+              <Text variant='normal'>Million Dollar Token Page </Text>
+              <Text variant='normal'>The homepage for the Metaverse </Text>
             </Stack>
           </Stack>
         </Stack>

@@ -51,6 +51,12 @@ export const buildAppTheme = (): ITheme => {
         'font-size': '0.75rem',
         'font-weight': '600',
       },
+      accountVariant: {
+        'font-size': '1.5rem',
+        'font-weight': '600',
+        'font-family': "'Open Sans', sans-serif",
+        padding: '20px',
+      },
       small: {
         'font-size': '0.85rem',
       },

@@ -12,31 +12,22 @@ const theme = buildAppTheme();
 
 const globals = {
 };
-
 const defaultDate = new Date();
 defaultDate.setHours(0, 0, 0, 0);
 
 export const App = (): React.ReactElement => {
   useFavicon('/assets/favicon.svg');
-
-
   return (
     <KibaApp theme={theme}>
       <Head headId='app'>
-
         <title>Web3 Images</title>
       </Head>
       <GlobalsProvider globals={globals}>
         <Router>
-          <Route path ='/' page={HomePage}>
-            <Route path='/account' page={AccountPage} />
-
-          </Route>
+          <Route path='/' page={HomePage} />
+          <Route path='/account' page={AccountPage} />
         </Router>
-
-
       </GlobalsProvider>
-
     </KibaApp>
   );
 };
