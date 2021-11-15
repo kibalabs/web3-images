@@ -51,11 +51,15 @@ export const buildAppTheme = (): ITheme => {
         'font-size': '0.75rem',
         'font-weight': '600',
       },
-      accountVariant: {
+      account: {
         'font-size': '1.5rem',
         'font-weight': '600',
         'font-family': "'Open Sans', sans-serif",
         padding: '20px',
+      },
+      normal: {
+        'font-size': '0.85rem',
+        'padding-Right': '20px',
       },
       small: {
         'font-size': '0.85rem',
@@ -194,7 +198,7 @@ export const buildAppTheme = (): ITheme => {
           },
         },
       },
-      buttonVariant: {
+      buttonPlay: {
         normal: {
           default: {
             background: {

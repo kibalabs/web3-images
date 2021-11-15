@@ -23,7 +23,7 @@ export const HomePage = (): React.ReactElement => {
             <Stack.Item growthFactor={9} shrinkFactor={9}>
               <SingleLineInput placeholderText='Account Address or ENS name e.g 0x123...789 OR Tokenhutn.eth' value={account} onValueChanged={setAccount} isEnabled={true} />
             </Stack.Item>
-            <IconButton variant='buttonVariant' icon={<KibaIcon iconId='ion-play' />} onClicked={onAccountClicked} />
+            <IconButton variant='buttonPlay' icon={<KibaIcon iconId='ion-play' />} onClicked={onAccountClicked} />
           </Stack>
           <Text>Or access via api: https://images-api.tokenhunt.co/accounts/address/image....</Text>
         </Stack>
@@ -33,7 +33,7 @@ export const HomePage = (): React.ReactElement => {
             <Stack.Item growthFactor={9} shrinkFactor={9}>
               <SingleLineInput placeholderText='Address/e.g 0x123...789 ' value={address} onValueChanged={setAddress}isEnabled={true} />
             </Stack.Item>
-            <IconButton variant='buttonVariant' icon={<KibaIcon iconId='ion-play' />} onClicked={onAddressClicked} />
+            <IconButton variant='buttonPlay' icon={<KibaIcon iconId='ion-play' />} onClicked={onAddressClicked} />
           </Stack>
           <Text>Or access via api: https://images-api.tokenhunt.co/registries/add/token/id/image</Text>
         </Stack>
@@ -46,7 +46,7 @@ export const HomePage = (): React.ReactElement => {
                 <Image source='/assets/tokenhunt.jpg' alternativeText='Kronikz' />
               </Box>
             </LinkBase>
-            <Stack direction={Direction.Vertical}paddingRight={PaddingSize.Wide2}>
+            <Stack direction={Direction.Vertical}>
               <Text alignment={TextAlignment.Center}>Token Hunt</Text>
               <Text variant='normal' alignment={TextAlignment.Center}>Your daily dose of the best NFTs</Text>
             </Stack>
@@ -55,7 +55,7 @@ export const HomePage = (): React.ReactElement => {
                 <Image source='/assets/mdtp-image.png' alternativeText='mdtp' />
               </Box>
             </LinkBase>
-            <Stack direction={Direction.Vertical}paddingRight={PaddingSize.Wide2}>
+            <Stack direction={Direction.Vertical}>
               <Text variant='normal' alignment={TextAlignment.Center}>Million Dollar Token Page </Text>
               <Text variant='normal' alignment={TextAlignment.Center}>The homepage for the Metaverse </Text>
             </Stack>

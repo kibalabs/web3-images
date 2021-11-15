@@ -19,8 +19,8 @@ export const AccountPage = (): React.ReactElement => {
                 <Image source='/assets/tokenhunt.jpg' alternativeText='Kronikz' />
               </Box>
             </LinkBase>
-            <Stack direction={Direction.Vertical} paddingRight={PaddingSize.Wide2}>
-              <Text>Token Hunt</Text>
+            <Stack direction={Direction.Vertical}>
+              <Text alignment={TextAlignment.Center}>Token Hunt</Text>
               <Text variant='normal' alignment={TextAlignment.Center}>Your daily dose of the best NFTs</Text>
             </Stack>
             <LinkBase variant='image' target='https://milliondollartokenpage.com'>
@@ -28,8 +28,8 @@ export const AccountPage = (): React.ReactElement => {
                 <Image source='/assets/mdtp-image.png' alternativeText='mdtp' />
               </Box>
             </LinkBase>
-            <Stack direction={Direction.Vertical}paddingRight={PaddingSize.Wide2}>
-              <Text variant='normal'>Million Dollar Token Page </Text>
+            <Stack direction={Direction.Vertical}>
+              <Text alignment={TextAlignment.Center}>Million Dollar Token Page </Text>
               <Text variant='normal' alignment={TextAlignment.Center}>The homepage for the Metaverse </Text>
             </Stack>
           </Stack>
