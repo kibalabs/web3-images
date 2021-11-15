@@ -3,24 +3,18 @@ import os
 from core.aws_requester import AwsRequester
 from core.exceptions import NotFoundException
 from core.util import chain_util
-from core.web3.eth_client import RestEthClient
+from core.web3.eth_client import EthClientInterface, RestEthClient
 from ens.utils import normalize_name as ens_normalize_name
 from ens.utils import normal_name_to_hash as ens_name_to_hash
-# from ens import ENS
-# from core.http.basic_authentication import BasicAuthentication
-# from web3 import HTTPProvider
 
 from web3images.store.retriever import Retriever
 
 
 class Web3ImagesManager:
 
-    def __init__(self, retriever: Retriever):
+    def __init__(self, retriever: Retriever, ethClient: EthClientInterface):
         self.retriever = retriever
-        # infuraAuth = BasicAuthentication(username='', password=os.environ['INFURA_PROJECT_SECRET'])
-        # self.ens = ENS(HTTPProvider('https://mainnet.infura.io/v3/588dadb12a504da7bd84f19baffa7f5e', request_kwargs={'headers': {'authorization': f'Basic {infuraAuth.to_string()}'}}))
-        awsRequester = AwsRequester(accessKeyId=os.environ['AWS_KEY'], accessKeySecret=os.environ['AWS_SECRET'])
-        self.ethClient = RestEthClient(url='https://nd-foldvvlb25awde7kbqfvpgvrrm.ethereum.managedblockchain.eu-west-1.amazonaws.com', requester=awsRequester)
+        self.ethClient = ethClient
         with open('./contracts/ENSRegistry.json') as contractJsonFile:
             ensRegistryContractJson = json.load(contractJsonFile)
         self.ensRegistryContractAddress = ensRegistryContractJson['address']
