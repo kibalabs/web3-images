@@ -188,6 +188,39 @@ export const buildAppTheme = (): ITheme => {
           },
         },
       },
+      buttonVariant: {
+        normal: {
+          default: {
+            background: {
+              'border-width': '1px',
+              'border-color': '#000000',
+            },
+            text: {
+              color: '$colors.textOnBrand',
+            },
+          },
+          hover: {
+            background: {
+              'background-color': 'rgba(255, 255, 255, 0.35)',
+            },
+          },
+          press: {
+            background: {
+              'background-color': 'rgba(255, 255, 255, 0.55)',
+            },
+          },
+          focus: {
+            background: {
+              'border-color': 'rgba(255, 255, 255, 0.75)',
+            },
+          },
+        },
+
+      },
+    },
+    input: {
+      'background-color': '#36D1DC',
+
     },
     inputWrappers: {
       dialogInput: {
@@ -201,5 +234,6 @@ export const buildAppTheme = (): ITheme => {
       },
     },
   });
+
   return theme;
 };
