@@ -55,7 +55,7 @@ jobs:
         run: docker build --tag $DOCKER_IMAGE .
       - name: Run linting
         run: |
-          docker run --name linting $DOCKER_IMAGE lint --directory notd --output-file linting-results.json --output-format annotations
+          docker run --name linting $DOCKER_IMAGE lint --directory web3images --output-file linting-results.json --output-format annotations
           docker cp linting:/app/linting-results.json ./linting-results.json
       - name: Upload linting results
         uses: kibalabs/github-action-create-annotations@main
