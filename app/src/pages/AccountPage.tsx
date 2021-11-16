@@ -7,7 +7,7 @@ export const AccountPage = (): React.ReactElement => {
     <BackgroundView linearGradient='#36D1DC,#1C92D2'>
       <Stack direction={Direction.Vertical} isFullWidth={true} isFullHeight={true} childAlignment={Alignment.Center} contentAlignment={Alignment.Start} isScrollableVertically={true} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide3}>
         <Text variant='header1'>Web3 Images</Text>
-        <Text variant='accountVariant'>Image for account: 0x123...789</Text>
+        <Text variant='account'>Image for account: 0x123...789</Text>
         <Box width='250px' height='250px'>
           <Image source='/assets/mdtp-image.png' alternativeText='mdtp' />
         </Box>
