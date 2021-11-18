@@ -5,10 +5,10 @@ import { Alignment, BackgroundView, Box, Direction, IconButton, Image, KibaIcon,
 
 export const HomePage = (): React.ReactElement => {
   const navigator = useNavigator();
-  const [account, setAccount] = React.useState<string>('');
+  const [accountId, setAccountId] = React.useState<string>('');
   const [address, setAddress] = React.useState<string>('');
   const onAccountClicked = () => {
-    navigator.navigateTo('/account');
+    navigator.navigateTo(`/account/${accountId}`);
   };
   const onAddressClicked = () => {
     navigator.navigateTo('/account');
@@ -21,11 +21,13 @@ export const HomePage = (): React.ReactElement => {
           <Text variant='default'>Get a user&apos;s profile image:</Text>
           <Stack direction={Direction.Horizontal} isFullWidth={true} shouldAddGutters={true} paddingTop={PaddingSize.Wide1} paddingBottom={PaddingSize.Wide1}>
             <Stack.Item growthFactor={9} shrinkFactor={9}>
-              <SingleLineInput placeholderText='Account Address or ENS name e.g 0x123...789 OR Tokenhutn.eth' value={account} onValueChanged={setAccount} isEnabled={true} />
+              <SingleLineInput placeholderText='Account Address or ENS name e.g 0x123...789 OR Tokenhutn.eth' value={accountId} onValueChanged={setAccountId} isEnabled={true} />
             </Stack.Item>
             <IconButton variant='buttonPlay' icon={<KibaIcon iconId='ion-play' />} onClicked={onAccountClicked} />
           </Stack>
-          <Text>Or access via api: https://images-api.tokenhunt.co/accounts/address/image....</Text>
+          <LinkBase target={`https://web3-images-api.kibalabs.com/v1/accounts/${accountId}`}>
+            <Text>Or access via api: https://web3-images-api.kibalabs.com/v1/accounts/account_id</Text>
+          </LinkBase>
         </Stack>
         <Stack direction={Direction.Vertical} contentAlignment={Alignment.Center} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide2}paddingLeft={PaddingSize.Wide2}paddingRight={PaddingSize.Wide2}>
           <Text>Get an NFT image:</Text>
