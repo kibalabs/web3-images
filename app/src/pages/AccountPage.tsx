@@ -22,7 +22,7 @@ Image for account:
           {/* eslint-disable-next-line */}
           <img
             src={`${apiUrl}/v1/accounts/${props.accountId}/image`}
-            // onError={(e: any) => { console.log(e); e.target.onerror = null; e.target.src = '/assets/tokenhunt.jpg'; }}
+            onError={(e: any) => { console.log(e); e.target.onerror = null; e.target.src = '/assets/tokenhunt.jpg'; }}
           />
         </Box>
         <Stack direction={Direction.Vertical} childAlignment={Alignment.Center} contentAlignment={Alignment.Center} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide3}>
