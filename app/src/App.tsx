@@ -3,17 +3,17 @@ import React from 'react';
 import { Route, Router, useFavicon } from '@kibalabs/core-react';
 import { Head, KibaApp } from '@kibalabs/ui-react';
 
-import { GlobalsProvider } from './globalsContext';
+import { GlobalsProvider, IGlobals } from './globalsContext';
 import { AccountPage } from './pages/AccountPage';
 import { HomePage } from './pages/Homepage';
 import { buildAppTheme } from './theme';
 
 const theme = buildAppTheme();
 
-const globals = {
+const globals: IGlobals = {
+  // apiUrl: 'https://web3-images-api.kibalabs.com',
+  apiUrl: 'http://localhost:5000',
 };
-const defaultDate = new Date();
-defaultDate.setHours(0, 0, 0, 0);
 
 export const App = (): React.ReactElement => {
   useFavicon('/assets/favicon.svg');

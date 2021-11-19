@@ -1,8 +1,11 @@
 import React from 'react';
 
-import { Alignment, BackgroundView, Box, Direction, IconButton, Image, KibaIcon, LinkBase, Markdown, MarkdownText, PaddingSize, SingleLineInput, Stack, Text, TextAlignment } from '@kibalabs/ui-react';
+import { Alignment, BackgroundView, Box, Direction, IconButton, Image, KibaIcon, LinkBase, MarkdownText, PaddingSize, SingleLineInput, Stack, Text, TextAlignment } from '@kibalabs/ui-react';
+
+import { useGlobals } from '../globalsContext';
 
 export const HomePage = (): React.ReactElement => {
+  const { apiUrl } = useGlobals();
   const [accountId, setAccountId] = React.useState<string>('');
   const [address, setAddress] = React.useState<string>('');
 
@@ -16,12 +19,12 @@ export const HomePage = (): React.ReactElement => {
             <Stack.Item growthFactor={9} shrinkFactor={9}>
               <SingleLineInput placeholderText='Account Address or ENS name e.g 0x123...789 OR Tokenhunt.eth' value={accountId} onValueChanged={setAccountId} isEnabled={true} />
             </Stack.Item>
-            <IconButton variant='buttonPlay' icon={<KibaIcon iconId='ion-play' />} target={'/account'} />
+            <IconButton variant='buttonPlay' icon={<KibaIcon iconId='ion-play' />} target={`/accounts/${accountId}`} />
           </Stack>
           { accountId ? (
-            <MarkdownText source={`Or access via api: [https://web3-images-api.kibalabs.com/v1/accounts/${accountId}/image](https://web3-images-api.kibalabs.com/v1/accounts/${accountId}/image)`} />
+            <MarkdownText source={`Or access via api: [${apiUrl}/v1/accounts/${accountId}/image](${apiUrl}/v1/accounts/${accountId}/image)`} />
           ) : (
-            <MarkdownText source={`Or access via api: [https://web3-images-api.kibalabs.com/v1/accounts/<account-id>/image](https://web3-images-api.kibalabs.com/v1/accounts/<account-id>/image)`} />
+            <MarkdownText source={`Or access via api: [${apiUrl}/v1/accounts/<account-id>/image](${apiUrl}/v1/accounts/<account-id>/image)`} />
           )}
         </Stack>
         <Stack direction={Direction.Vertical} contentAlignment={Alignment.Center} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide2}paddingLeft={PaddingSize.Wide2}paddingRight={PaddingSize.Wide2}>
@@ -32,7 +35,7 @@ export const HomePage = (): React.ReactElement => {
             </Stack.Item>
             <IconButton variant='buttonPlay' icon={<KibaIcon iconId='ion-play' />} target={'/account'} />
           </Stack>
-          <Text>{`Or access via api: https://images-api.tokenhunt.co/registries/<registry-address>/token/<token-id>/image`}</Text>
+          <Text>{'Or access via api: https://images-api.tokenhunt.co/registries/<registry-address>/token/<token-id>/image'}</Text>
         </Stack>
         <Stack />
         <Stack direction={Direction.Vertical} childAlignment={Alignment.Center} contentAlignment={Alignment.Center} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide3}>

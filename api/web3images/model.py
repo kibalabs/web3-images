@@ -4,6 +4,7 @@ from typing import Optional
 from core.util.typing_util import JSON
 from pydantic import dataclasses
 
+
 @dataclasses.dataclass
 class TokenMetadata:
     registryAddress: str

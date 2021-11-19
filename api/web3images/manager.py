@@ -1,15 +1,14 @@
 import base64
 import json
 
-from core.exceptions import NotFoundException, RedirectException
+from core.exceptions import FoundRedirectException
 from core.util import chain_util
 from core.web3.eth_client import EthClientInterface
-from ens.utils import normalize_name as ens_normalize_name
 from ens.utils import normal_name_to_hash as ens_name_to_hash
+from ens.utils import normalize_name as ens_normalize_name
 
 from web3images.internal.blockies_generator import BlockiesGenerator
 from web3images.model import ImageData
-
 from web3images.store.retriever import Retriever
 
 
@@ -44,24 +43,21 @@ class Web3ImagesManager:
             else:
                 mimeType = header
                 encoding = None
-            print(header, mimeType, encoding)
             if encoding.lower() == 'base64':
                 data = base64.b64decode(data.encode('utf-8'))
             else:
                 data = data.encode()
-            print(data)
-            # data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaW5ZTWluIG1lZXQiIHZpZXdCb3g9IjAgMCAzNTAgMzUwIj48c3R5bGU+LmJhc2UgeyBmb250LWZhbWlseTogbW9ub3NwYWNlOyBmb250LXNpemU6IDI4cHg7IH08L3N0eWxlPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiM1NDNCMjMiIC8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM4MUJFMUMiIGNsYXNzPSJiYXNlIj4oNDMsNTkpPC90ZXh0Pjwvc3ZnPg==
             return ImageData(mimeType=mimeType, content=data)
-        raise RedirectException(location=imageString)
+        raise FoundRedirectException(location=imageString)
 
-    async def get_collection_token_image(self, registryAddress: str, tokenId: str) -> str:
+    async def get_collection_token_image(self, registryAddress: str, tokenId: str) -> ImageData:
         normalizedAddress = chain_util.normalize_address(value=registryAddress)
         tokenMetadata = await self.retriever.get_token_metadata_by_registry_token_id(registryAddress=normalizedAddress, tokenId=tokenId)
         imageUrl = tokenMetadata.imageUrl
         # TODO(krishan711): resolve NotFounds
         return await self._resolve_image(imageString=imageUrl)
 
-    async def get_account_image(self, accountAddress: str) -> str:
+    async def get_account_image(self, accountAddress: str) -> ImageData:
         text = None
         accountAddress = chain_util.normalize_address(value=accountAddress)
         ensNormalizedAddress = ens_normalize_name(f'{accountAddress.lower().replace("0x", "", 1)}.addr.reverse')
@@ -86,8 +82,11 @@ class Web3ImagesManager:
         blockSvg = self.blockiesGenerator.create_svg_for_eth_address(address=accountAddress)
         return ImageData(mimeType='image/svg+xml', content=blockSvg.encode())
 
-
 # token with url
 # curl -i http://localhost:5000/v1/collections/0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e/tokens/4201/image
 # token with data
 # curl -i http://localhost:5000/v1/collections/0x3CA53BE299C765cDC66cC1723F8B3EEFB3aAa413/tokens/7596/image
+# account with url
+# curl -i http://localhost:5000/v1/accounts/0xdCf1220Cd53506B1e7137bffC2b8814C6Cc24421/image
+# account without text
+# curl -i http://localhost:5000/v1/accounts/0xdCf1220Cd53506B1e7137bffC2b8814C6Cc24421/image
