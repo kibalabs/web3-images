@@ -9,6 +9,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from web3images.api.api_v1 import create_api as create_v1_api
+from web3images.internal.blockies_generator import BlockiesGenerator
 from web3images.manager import Web3ImagesManager
 from web3images.store.retriever import Retriever
 
@@ -19,8 +20,9 @@ retriever = Retriever(database=database)
 
 awsRequester = AwsRequester(accessKeyId=os.environ['AWS_KEY'], accessKeySecret=os.environ['AWS_SECRET'])
 ethClient = RestEthClient(url='https://nd-foldvvlb25awde7kbqfvpgvrrm.ethereum.managedblockchain.eu-west-1.amazonaws.com', requester=awsRequester)
+blockiesGenerator = BlockiesGenerator()
 
-web3ImagesManager = Web3ImagesManager(retriever=retriever, ethClient=ethClient)
+web3ImagesManager = Web3ImagesManager(retriever=retriever, ethClient=ethClient, blockiesGenerator=blockiesGenerator)
 
 app = FastAPI()
 app.include_router(router=create_health_api(name=os.environ.get('NAME', 'web3images'), version=os.environ.get('VERSION')))

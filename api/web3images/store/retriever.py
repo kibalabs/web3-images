@@ -1,10 +1,10 @@
 from core.exceptions import NotFoundException
-
 from core.store.retriever import Retriever as CoreRetriever
 
 from web3images.model import TokenMetadata
 from web3images.store.schema import TokenMetadataTable
 from web3images.store.schema_conversions import token_metadata_from_row
+
 
 class Retriever(CoreRetriever):
 

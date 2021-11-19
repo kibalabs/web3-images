@@ -1,20 +1,16 @@
 import React from 'react';
 
-import { useNavigator } from '@kibalabs/core-react';
-import { Alignment, BackgroundView, Box, Direction, IconButton, Image, KibaIcon, LinkBase, PaddingSize, SingleLineInput, Stack, Text, TextAlignment } from '@kibalabs/ui-react';
+import { Alignment, BackgroundView, Box, Direction, IconButton, Image, KibaIcon, LinkBase, MarkdownText, PaddingSize, SingleLineInput, Stack, Text, TextAlignment } from '@kibalabs/ui-react';
+
+import { useGlobals } from '../globalsContext';
 
 export const HomePage = (): React.ReactElement => {
-  const navigator = useNavigator();
+  const { apiUrl } = useGlobals();
   const [accountId, setAccountId] = React.useState<string>('');
   const [address, setAddress] = React.useState<string>('');
-  const onAccountClicked = () => {
-    navigator.navigateTo(`/accounts/${accountId}`);
-  };
-  const onAddressClicked = () => {
-    navigator.navigateTo('/account');
-  };
+
   return (
-    <BackgroundView linearGradient='#36D1DC,#1C92D2'>
+    <BackgroundView linearGradient='#36D1DC, #1C92D2'>
       <Stack direction={Direction.Vertical} isFullWidth={true} isFullHeight={true} childAlignment={Alignment.Center} contentAlignment={Alignment.Start} isScrollableVertically={true} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide3}>
         <Text variant='header1'>Web3 Images</Text>
         <Stack direction={Direction.Vertical} contentAlignment={Alignment.Center} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide2}paddingLeft={PaddingSize.Wide2}paddingRight={PaddingSize.Wide2}>
@@ -23,11 +19,13 @@ export const HomePage = (): React.ReactElement => {
             <Stack.Item growthFactor={9} shrinkFactor={9}>
               <SingleLineInput placeholderText='Account Address or ENS name e.g 0x123...789 OR Tokenhunt.eth' value={accountId} onValueChanged={setAccountId} isEnabled={true} />
             </Stack.Item>
-            <IconButton variant='buttonPlay' icon={<KibaIcon iconId='ion-play' />} onClicked={onAccountClicked} />
+            <IconButton variant='buttonPlay' icon={<KibaIcon iconId='ion-play' />} target={`/accounts/${accountId}`} />
           </Stack>
-          <LinkBase target={`https://web3-images-api.kibalabs.com/v1/accounts/${accountId}/image`}>
-            <Text>Or access via api: https://web3-images-api.kibalabs.com/v1/accounts/account_id</Text>
-          </LinkBase>
+          { accountId ? (
+            <MarkdownText source={`Or access via api: [${apiUrl}/v1/accounts/${accountId}/image](${apiUrl}/v1/accounts/${accountId}/image)`} />
+          ) : (
+            <MarkdownText source={`Or access via api: [${apiUrl}/v1/accounts/<account-id>/image](${apiUrl}/v1/accounts/<account-id>/image)`} />
+          )}
         </Stack>
         <Stack direction={Direction.Vertical} contentAlignment={Alignment.Center} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide2}paddingLeft={PaddingSize.Wide2}paddingRight={PaddingSize.Wide2}>
           <Text>Get an NFT image:</Text>
@@ -35,9 +33,9 @@ export const HomePage = (): React.ReactElement => {
             <Stack.Item growthFactor={9} shrinkFactor={9}>
               <SingleLineInput placeholderText='Address/e.g 0x123...789 ' value={address} onValueChanged={setAddress}isEnabled={true} />
             </Stack.Item>
-            <IconButton variant='buttonPlay' icon={<KibaIcon iconId='ion-play' />} onClicked={onAddressClicked} />
+            <IconButton variant='buttonPlay' icon={<KibaIcon iconId='ion-play' />} target={'/account'} />
           </Stack>
-          <Text>Or access via api: https://images-api.tokenhunt.co/registries/add/token/id/image</Text>
+          <Text>{'Or access via api: https://images-api.tokenhunt.co/registries/<registry-address>/token/<token-id>/image'}</Text>
         </Stack>
         <Stack />
         <Stack direction={Direction.Vertical} childAlignment={Alignment.Center} contentAlignment={Alignment.Center} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide3}>

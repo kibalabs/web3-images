@@ -1,14 +1,9 @@
 import React from 'react';
 
-import { LocalStorageClient, Requester } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
 
-import { NotdClient } from './client/client';
-
 export interface IGlobals {
-  requester: Requester;
-  notdClient: NotdClient;
-  localStorageClient: LocalStorageClient;
+  apiUrl: string;
 }
 
 export const GlobalsContext = React.createContext<IGlobals | null>(null);
