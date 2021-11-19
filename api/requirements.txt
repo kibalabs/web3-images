@@ -1,1 +1,1 @@
-kiba-core[database-psql, requester, api, web3]==0.2.3
+kiba-core[database-psql, requester, api, web3]==0.2.4
