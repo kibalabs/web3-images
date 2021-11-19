@@ -25,7 +25,7 @@ export const App = (): React.ReactElement => {
       <GlobalsProvider globals={globals}>
         <Router>
           <Route path='/' page={HomePage} />
-          <Route path='/account' page={AccountPage} />
+          <Route path='/accounts/:accountId' page={AccountPage} />
         </Router>
       </GlobalsProvider>
     </KibaApp>
