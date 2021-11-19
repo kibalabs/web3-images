@@ -16,3 +16,9 @@ class TokenMetadata:
     tokenMetadataId: int
     createdDate: datetime.datetime
     updatedDate: datetime.datetime
+
+
+@dataclasses.dataclass
+class ImageData:
+    mimeType: str
+    content: bytes
