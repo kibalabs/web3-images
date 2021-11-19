@@ -8,7 +8,7 @@ export const HomePage = (): React.ReactElement => {
   const [accountId, setAccountId] = React.useState<string>('');
   const [address, setAddress] = React.useState<string>('');
   const onAccountClicked = () => {
-    navigator.navigateTo(`/account/${accountId}`);
+    navigator.navigateTo(`/accounts/${accountId}`);
   };
   const onAddressClicked = () => {
     navigator.navigateTo('/account');
@@ -21,11 +21,11 @@ export const HomePage = (): React.ReactElement => {
           <Text variant='default'>Get a user&apos;s profile image:</Text>
           <Stack direction={Direction.Horizontal} isFullWidth={true} shouldAddGutters={true} paddingTop={PaddingSize.Wide1} paddingBottom={PaddingSize.Wide1}>
             <Stack.Item growthFactor={9} shrinkFactor={9}>
-              <SingleLineInput placeholderText='Account Address or ENS name e.g 0x123...789 OR Tokenhutn.eth' value={accountId} onValueChanged={setAccountId} isEnabled={true} />
+              <SingleLineInput placeholderText='Account Address or ENS name e.g 0x123...789 OR Tokenhunt.eth' value={accountId} onValueChanged={setAccountId} isEnabled={true} />
             </Stack.Item>
             <IconButton variant='buttonPlay' icon={<KibaIcon iconId='ion-play' />} onClicked={onAccountClicked} />
           </Stack>
-          <LinkBase target={`https://web3-images-api.kibalabs.com/v1/accounts/${accountId}`}>
+          <LinkBase target={`https://web3-images-api.kibalabs.com/v1/accounts/${accountId}/image`}>
             <Text>Or access via api: https://web3-images-api.kibalabs.com/v1/accounts/account_id</Text>
           </LinkBase>
         </Stack>

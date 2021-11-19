@@ -16,7 +16,6 @@ Image for account:
           {props.accountId}
         </Text>
         <Box width='250px' height='250px'>
-          {/* <Image source={`https://web3-images-api.kibalabs.com/v1/accounts/${props.accountId}/image` || defaultImage} alternativeText='image'  /> */}
           <img src={`https://web3-images-api.kibalabs.com/v1/accounts/${props.accountId}/image`} onError={(e: any) => { e.target.onerror = null; e.target.src = '/assets/tokenhunt.jpg'; }} />
         </Box>
         <Stack direction={Direction.Vertical} childAlignment={Alignment.Center} contentAlignment={Alignment.Center} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide3}>
