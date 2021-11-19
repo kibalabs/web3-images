@@ -11,8 +11,8 @@ import { buildAppTheme } from './theme';
 const theme = buildAppTheme();
 
 const globals: IGlobals = {
-  // apiUrl: 'https://web3-images-api.kibalabs.com',
-  apiUrl: 'http://localhost:5000',
+  apiUrl: 'https://web3-images-api.kibalabs.com',
+  // apiUrl: 'http://localhost:5000',
 };
 
 export const App = (): React.ReactElement => {
