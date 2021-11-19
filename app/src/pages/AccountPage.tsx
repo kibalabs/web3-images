@@ -14,15 +14,12 @@ export const AccountPage = (props: AccountPageProps): React.ReactElement => {
     <BackgroundView linearGradient='#36D1DC,#1C92D2'>
       <Stack direction={Direction.Vertical} isFullWidth={true} isFullHeight={true} childAlignment={Alignment.Center} contentAlignment={Alignment.Start} isScrollableVertically={true} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide3}>
         <Text variant='header1'>Web3 Images</Text>
-        <Text variant='account'>
-Image for account:
-          {props.accountId}
-        </Text>
+        <Text variant='account'>{`Image for account: ${props.accountId}`}</Text>
         <Box width='250px' height='250px'>
-          {/* eslint-disable-next-line */}
           <img
             src={`${apiUrl}/v1/accounts/${props.accountId}/image`}
-            onError={(e: any) => { console.log(e); e.target.onerror = null; e.target.src = '/assets/tokenhunt.jpg'; }}
+            // eslint-disable-next-line
+            onError={(error: React.SyntheticEvent): void => { error.target.onerror = null; error.target.src = '/assets/tokenhunt.jpg'; }}
           />
         </Box>
         <Stack direction={Direction.Vertical} childAlignment={Alignment.Center} contentAlignment={Alignment.Center} paddingTop={PaddingSize.Wide3} paddingBottom={PaddingSize.Wide3}>
@@ -49,7 +46,6 @@ Image for account:
           </Stack>
         </Stack>
         <Text>Made by kibalabs</Text>
-        <Stack />
       </Stack>
     </BackgroundView>
   );
