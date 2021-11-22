@@ -18,7 +18,7 @@ const globals: IGlobals = {
 export const App = (): React.ReactElement => {
   useFavicon('/assets/favicon.svg');
   return (
-    <KibaApp theme={theme}>
+    <KibaApp theme={theme} background={{ linearGradient: 'rgb(54, 209, 220), rgb(28, 146, 210)' }}>
       <Head headId='app'>
         <title>Web3 Images</title>
       </Head>

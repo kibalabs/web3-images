@@ -3,8 +3,7 @@ import { buildTheme, ITheme } from '@kibalabs/ui-react';
 export const buildAppTheme = (): ITheme => {
   const theme = buildTheme({
     colors: {
-      brandPrimary: '#1C92D2',
-      brandSecondary: '#36D1DC',
+      brandPrimary: '#ffffff',
       background: '#000000',
       text: '#ffffff',
     },
