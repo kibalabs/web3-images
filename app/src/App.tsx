@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Route, Router, useFavicon, useInitialization } from '@kibalabs/core-react';
+import { Route, Router, useInitialization } from '@kibalabs/core-react';
 import { EveryviewTracker } from '@kibalabs/everyview-tracker';
 import { Head, KibaApp } from '@kibalabs/ui-react';
 
@@ -19,8 +19,6 @@ const globals: IGlobals = {
 };
 
 export const App = (): React.ReactElement => {
-  useFavicon('/assets/favicon.svg');
-
   useInitialization((): void => {
     tracker.trackApplicationOpen();
   });
