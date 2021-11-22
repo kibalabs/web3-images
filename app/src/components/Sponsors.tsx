@@ -10,10 +10,10 @@ export const SponsorView = (): React.ReactElement => {
         <Text>Our Sponsors:</Text>
       </Stack.Item>
       <Stack directionResponsive={{ base: Direction.Vertical, medium: Direction.Horizontal }} shouldAddGutters={true} childAlignment={Alignment.Center}>
-        <LinkBase variant='image' target='https://tokenhunt.io'>
+        <LinkBase variant='image' target='https://nft.tokenhunt.io'>
           <Stack direction={Direction.Horizontal} shouldAddGutters={true} padding={PaddingSize.Default}>
             <Box width='3em' height='3em'>
-              <Image source='/assets/tokenhunt.jpg' alternativeText='TokenHunt' />
+              <Image source='/assets/tokenhunt.jpg' alternativeText='Token Hunt' />
             </Box>
             <Stack direction={Direction.Vertical}>
               <Text alignment={TextAlignment.Left} variant='bold'>Token Hunt</Text>
