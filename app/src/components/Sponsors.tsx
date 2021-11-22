@@ -24,7 +24,7 @@ export const SponsorView = (): React.ReactElement => {
         <LinkBase variant='image' target='https://milliondollartokenpage.com'>
           <Stack direction={Direction.Horizontal} shouldAddGutters={true} padding={PaddingSize.Default}>
             <Box width='3em' height='3em'>
-              <Image source='/assets/mdtp-image.png' alternativeText='Million Dollar Token Page' />
+              <Image source='/assets/mdtp.png' alternativeText='Million Dollar Token Page' />
             </Box>
             <Stack direction={Direction.Vertical}>
               <Text alignment={TextAlignment.Left} variant='bold'>Million Dollar Token Page</Text>
