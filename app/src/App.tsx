@@ -14,8 +14,8 @@ const theme = buildAppTheme();
 const tracker = new EveryviewTracker('8d6b7f803294435881c5e70ef9783011', true);
 
 const globals: IGlobals = {
-  apiUrl: 'https://web3-images-api.kibalabs.com',
-  // apiUrl: 'http://localhost:5000',
+  // apiUrl: 'https://web3-images-api.kibalabs.com',
+  apiUrl: 'http://localhost:5000',
 };
 
 export const App = (): React.ReactElement => {

@@ -92,10 +92,10 @@ export const HomePage = (): React.ReactElement => {
           <Stack.Item growthFactor={1} shrinkFactor={1}>
             <SingleLineInput placeholderText='Account Address or ENS name e.g 0x123...789 OR Tokenhunt.eth' value={accountId} onValueChanged={onAccountIdChanged} />
           </Stack.Item>
-          <IconButton icon={<KibaIcon iconId='ion-play' />} target={`/accounts/${accountId}`} isEnabled={!!accountId} />
+          <IconButton icon={<KibaIcon iconId='ion-play' />} target={`/accounts/${encodeURIComponent(accountId)}`} isEnabled={!!accountId} />
         </Stack>
         <Stack.Item alignment={Alignment.Start}>
-          <Text variant='note'>{accountId ? `via api: ${apiUrl}/v1/accounts/${accountId}/image` : `via api: ${apiUrl}/v1/accounts/{account-id}/image`}</Text>
+          <Text variant='note'>{accountId ? `via api: ${apiUrl}/v1/accounts/${encodeURIComponent(accountId)}/image` : `via api: ${apiUrl}/v1/accounts/{account-id}/image`}</Text>
         </Stack.Item>
         <Spacing variant={PaddingSize.Wide} />
         <Stack.Item alignment={Alignment.Start}>
