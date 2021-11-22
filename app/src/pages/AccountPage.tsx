@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Alignment, Box, Direction, Image, LinkBase, PaddingSize, ResponsiveContainingView, Spacing, Stack, Text } from '@kibalabs/ui-react';
+import { Alignment, Box, Direction, Image, LinkBase, PaddingSize, ResponsiveContainingView, Spacing, Stack, Text, TextAlignment } from '@kibalabs/ui-react';
 
 import { SponsorView } from '../components/Sponsors';
 import { useGlobals } from '../globalsContext';
@@ -30,6 +30,7 @@ export const AccountPage = (props: AccountPageProps): React.ReactElement => {
             // onError={(error: React.SyntheticEvent): void => { error.target.onerror = null; error.target.src = '/assets/tokenhunt.jpg'; }}
           />
         </Box>
+        <Text alignment={TextAlignment.Center}>{`via api: ${apiUrl}/v1/accounts/${props.accountId}/image`}</Text>
         <Stack.Item growthFactor={1} shrinkFactor={1}>
           <Spacing variant={PaddingSize.Wide2} />
         </Stack.Item>

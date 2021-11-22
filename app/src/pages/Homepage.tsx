@@ -9,6 +9,24 @@ export const HomePage = (): React.ReactElement => {
   const { apiUrl } = useGlobals();
   const [accountId, setAccountId] = React.useState<string>('');
   const [address, setAddress] = React.useState<string>('');
+  const [registryAddress, setRegistryAddress] = React.useState<string | null>(null);
+  const [tokenId, setTokenId] = React.useState<string | null>(null);
+
+  const onAccountIdChanged = (value: string): void => {
+    setAccountId(value);
+  };
+
+  const onAddressChanged = (value: string): void => {
+    setAddress(value);
+    const parts = value.split('/', 2);
+    if (parts.length !== 2) {
+      setRegistryAddress(null);
+      setTokenId(null);
+    } else {
+      setRegistryAddress(parts[0]);
+      setTokenId(parts[1]);
+    }
+  };
 
   return (
     <ResponsiveContainingView sizeResponsive={{ base: 12, medium: 10, large: 8 }}>
@@ -72,7 +90,7 @@ export const HomePage = (): React.ReactElement => {
         </Stack.Item>
         <Stack direction={Direction.Horizontal} isFullWidth={true} shouldAddGutters={true}>
           <Stack.Item growthFactor={1} shrinkFactor={1}>
-            <SingleLineInput placeholderText='Account Address or ENS name e.g 0x123...789 OR Tokenhunt.eth' value={accountId} onValueChanged={setAccountId} />
+            <SingleLineInput placeholderText='Account Address or ENS name e.g 0x123...789 OR Tokenhunt.eth' value={accountId} onValueChanged={onAccountIdChanged} />
           </Stack.Item>
           <IconButton icon={<KibaIcon iconId='ion-play' />} target={`/accounts/${accountId}`} isEnabled={!!accountId} />
         </Stack>
@@ -85,12 +103,12 @@ export const HomePage = (): React.ReactElement => {
         </Stack.Item>
         <Stack direction={Direction.Horizontal} isFullWidth={true} shouldAddGutters={true}>
           <Stack.Item growthFactor={1} shrinkFactor={1}>
-            <SingleLineInput placeholderText='NFT registryAddress/tokenId e.g 0x123...789/' value={address} onValueChanged={setAddress} />
+            <SingleLineInput placeholderText='NFT registryAddress/tokenId e.g 0x123...AbC/456' value={address} onValueChanged={onAddressChanged} />
           </Stack.Item>
-          <IconButton icon={<KibaIcon iconId='ion-play' />} target={'/collections/{registry_address}/tokens/{token_id}'} isEnabled={!!address} />
+          <IconButton icon={<KibaIcon iconId='ion-play' />} target={`/collections/${registryAddress}/tokens/${tokenId}`} isEnabled={!!registryAddress && !!tokenId} />
         </Stack>
         <Stack.Item alignment={Alignment.Start}>
-          <Text variant='note'>{address ? `via api: ${apiUrl}/v1/registries/${address}/image` : `via api: ${apiUrl}/v1/registries/{registry-address}/token/{token-id}/image`}</Text>
+          <Text variant='note'>{(!!registryAddress && !!tokenId) ? `via api: ${apiUrl}/v1/collections/${registryAddress}/tokens/${tokenId}/image` : `via api: ${apiUrl}/v1/collections/{registry-address}/tokens/{token-id}/image`}</Text>
         </Stack.Item>
         <Stack.Item growthFactor={1} shrinkFactor={1}>
           <Spacing variant={PaddingSize.Wide2} />
