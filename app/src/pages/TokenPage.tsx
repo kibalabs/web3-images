@@ -5,11 +5,12 @@ import { Alignment, Box, Direction, Image, LinkBase, PaddingSize, ResponsiveCont
 import { SponsorView } from '../components/Sponsors';
 import { useGlobals } from '../globalsContext';
 
-export type AccountPageProps = {
-  accountId: string;
+export type TokenPageProps = {
+  registryAddress: string;
+  tokenId: string;
 }
 
-export const AccountPage = (props: AccountPageProps): React.ReactElement => {
+export const TokenPage = (props: TokenPageProps): React.ReactElement => {
   const { apiUrl } = useGlobals();
   return (
     <ResponsiveContainingView sizeResponsive={{ base: 12, medium: 10, large: 8 }}>
@@ -21,16 +22,16 @@ export const AccountPage = (props: AccountPageProps): React.ReactElement => {
           <Spacing variant={PaddingSize.Wide2} />
         </Stack.Item>
         <Stack.Item gutterAfter={PaddingSize.Wide}>
-          <Text variant='header3'>{props.accountId}</Text>
+          <Text variant='header3'>{`${props.registryAddress}/${props.tokenId}`}</Text>
         </Stack.Item>
         <Box width='250px' height='250px'>
           <Image
-            source={`${apiUrl}/v1/accounts/${props.accountId}/image`}
+            source={`${apiUrl}/v1/collections/${props.registryAddress}/tokens/${props.tokenId}/image`}
             alternativeText='Avatar'
             // onError={(error: React.SyntheticEvent): void => { error.target.onerror = null; error.target.src = '/assets/tokenhunt.jpg'; }}
           />
         </Box>
-        <Text alignment={TextAlignment.Center}>{`via api: ${apiUrl}/v1/accounts/${props.accountId}/image`}</Text>
+        <Text alignment={TextAlignment.Center}>{`via api: ${apiUrl}/v1/collections/${props.registryAddress}/tokens/${props.tokenId}/image`}</Text>
         <Stack.Item growthFactor={1} shrinkFactor={1}>
           <Spacing variant={PaddingSize.Wide2} />
         </Stack.Item>
