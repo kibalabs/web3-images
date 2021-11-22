@@ -31,6 +31,7 @@ class Web3ImagesManager:
             ensPublicResolverContractJson = json.load(contractJsonFile)
         self.ensPublicResolverContractAbi = ensPublicResolverContractJson['abi']
         self.ensPublicResolverTextFunctionAbi = [internalAbi for internalAbi in self.ensPublicResolverContractAbi if internalAbi.get('name') == 'text'][0]
+        self.ensPublicResolverAddressFunctionAbi = [internalAbi for internalAbi in self.ensPublicResolverContractAbi if internalAbi.get('name') == 'addr'][0]
 
     async def _resolve_image(self, imageString: str) -> ImageData:
         if imageString.startswith('ipfs://'):
@@ -58,6 +59,14 @@ class Web3ImagesManager:
         return await self._resolve_image(imageString=imageUrl)
 
     async def get_account_image(self, accountAddress: str) -> ImageData:
+        if accountAddress.endswith('.eth'):
+            normalizedName = ens_normalize_name(accountAddress)
+            normalizedHashedName = ens_name_to_hash(normalizedName)
+            addressNodeResult = await self.ethClient.call_function(toAddress=self.ensRegistryContractAddress, contractAbi=self.ensRegistryContractAbi, functionAbi=self.ensRegistryResolveFunctionAbi, arguments={'node': normalizedHashedName})
+            addressNode = addressNodeResult[0]
+            if addressNode:
+                addressResult = await self.ethClient.call_function(toAddress=addressNode, contractAbi=self.ensPublicResolverContractAbi, functionAbi=self.ensPublicResolverAddressFunctionAbi, arguments={'node': normalizedHashedName})
+                accountAddress = addressResult[0]
         text = None
         accountAddress = chain_util.normalize_address(value=accountAddress)
         ensNormalizedAddress = ens_normalize_name(f'{accountAddress.lower().replace("0x", "", 1)}.addr.reverse')
