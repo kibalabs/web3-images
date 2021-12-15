@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Route, Router, useInitialization } from '@kibalabs/core-react';
+import { IRoute, Router, useInitialization } from '@kibalabs/core-react';
 import { EveryviewTracker } from '@kibalabs/everyview-tracker';
 import { Head, KibaApp } from '@kibalabs/ui-react';
 
@@ -23,17 +23,19 @@ export const App = (): React.ReactElement => {
     tracker.trackApplicationOpen();
   });
 
+  const routes: IRoute[] = [
+    { path: '/', page: HomePage },
+    { path: '/accounts/:accountId', page: AccountPage },
+    { path: '/collections/:registryAddress/tokens/:tokenId', page: TokenPage },
+  ];
+
   return (
     <KibaApp theme={theme} background={{ linearGradient: 'rgb(54, 209, 220), rgb(28, 146, 210)' }}>
       <Head headId='app'>
         <title>Web3 Images</title>
       </Head>
       <GlobalsProvider globals={globals}>
-        <Router>
-          <Route path='/' page={HomePage} />
-          <Route path='/accounts/:accountId' page={AccountPage} />
-          <Route path='/collections/:registryAddress/tokens/:tokenId' page={TokenPage} />
-        </Router>
+        <Router routes={routes} />
       </GlobalsProvider>
     </KibaApp>
   );
