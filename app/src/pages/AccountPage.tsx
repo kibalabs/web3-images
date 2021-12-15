@@ -6,10 +6,6 @@ import { Alignment, Box, Direction, Image, LinkBase, PaddingSize, ResponsiveCont
 import { SponsorView } from '../components/Sponsors';
 import { useGlobals } from '../globalsContext';
 
-export type AccountPageProps = {
-  accountId: string;
-}
-
 export const AccountPage = (): React.ReactElement => {
   const { apiUrl } = useGlobals();
   const routeParams = useRouteParams();
