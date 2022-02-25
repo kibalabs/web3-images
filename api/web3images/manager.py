@@ -87,6 +87,9 @@ class Web3ImagesManager:
             if text.startswith('eip155:1/erc721:'):
                 tokenParts = text.replace('eip155:1/erc721:', '').split('/')
                 return await self.get_collection_token_image(registryAddress=tokenParts[0], tokenId=tokenParts[1])
+            if text.startswith('eip155:1/erc1155:'):
+                tokenParts = text.replace('eip155:1/erc1155:', '').split('/')
+                return await self.get_collection_token_image(registryAddress=tokenParts[0], tokenId=tokenParts[1])
             return await self._resolve_image(imageString=text)
         blockSvg = self.blockiesGenerator.create_svg_for_eth_address(address=accountAddress)
         return ImageData(mimeType='image/svg+xml', content=blockSvg.encode())
