@@ -3,7 +3,7 @@ import React from 'react';
 import { IRoute, Router, useInitialization } from '@kibalabs/core-react';
 import { EveryviewTracker } from '@kibalabs/everyview-tracker';
 import { Head, KibaApp } from '@kibalabs/ui-react';
-
+import { Footer } from './components/Footer';
 import { GlobalsProvider, IGlobals } from './globalsContext';
 import { AccountPage } from './pages/AccountPage';
 import { HomePage } from './pages/Homepage';
@@ -36,6 +36,7 @@ export const App = (): React.ReactElement => {
       </Head>
       <GlobalsProvider globals={globals}>
         <Router routes={routes} />
+        <Footer />
       </GlobalsProvider>
     </KibaApp>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Alignment, Box, Direction, Image, LinkBase, MarkdownText, PaddingSize, Spacing, Stack, Text, TextAlignment } from '@kibalabs/ui-react';
+import { Alignment, Box, Direction, Image, LinkBase, PaddingSize, Spacing, Stack, Text, TextAlignment } from '@kibalabs/ui-react';
 
 
 export const SponsorView = (): React.ReactElement => {
@@ -34,7 +34,6 @@ export const SponsorView = (): React.ReactElement => {
         </LinkBase>
       </Stack>
       <Spacing />
-      <MarkdownText source='Made by [Kiba Labs](https://www.kibalabs.com)' />
     </Stack>
   );
 };
