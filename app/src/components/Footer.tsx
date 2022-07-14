@@ -9,7 +9,7 @@ export const Footer = (): React.ReactElement => {
         <Stack direction={Direction.Horizontal} childAlignment={Alignment.Center} contentAlignment={Alignment.Center} shouldAddGutters={true} padding={PaddingSize.Default}>
           <Text>Made by</Text>
           <Box shouldClipContent={true} width='1.5rem' height='1.5rem'>
-            <Image source='/assets/tokenpage.png' alternativeText='TokenPage Logo' fitType='contain' />
+            <Image source='https://www.tokenpage.xyz/assets/favicon.png' alternativeText='TokenPage Logo' fitType='contain' />
           </Box>
           <Text>Token Page</Text>
         </Stack>

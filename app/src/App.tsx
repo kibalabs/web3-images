@@ -37,8 +37,8 @@ export const App = (): React.ReactElement => {
       </Head>
       <GlobalsProvider globals={globals}>
         <Router routes={routes} />
-        <Footer />
       </GlobalsProvider>
+      <Footer />
     </KibaApp>
   );
 };

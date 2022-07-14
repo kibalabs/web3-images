@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Alignment, Box, Direction, EqualGrid, IconButton, Image, KibaIcon, LinkBase, MarkdownText, PaddingSize, ResponsiveContainingView, SingleLineInput, Spacing, Stack, Text } from '@kibalabs/ui-react';
 
-import { SponsorView } from '../components/Sponsors';
 import { useGlobals } from '../globalsContext';
 
 export const HomePage = (): React.ReactElement => {
@@ -113,7 +112,6 @@ export const HomePage = (): React.ReactElement => {
         <Stack.Item growthFactor={1} shrinkFactor={1}>
           <Spacing variant={PaddingSize.Wide2} />
         </Stack.Item>
-        <SponsorView />
       </Stack>
     </ResponsiveContainingView>
   );
