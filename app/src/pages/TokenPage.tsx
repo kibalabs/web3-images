@@ -3,7 +3,6 @@ import React from 'react';
 import { useRouteParams } from '@kibalabs/core-react';
 import { Alignment, Box, Direction, Image, LinkBase, PaddingSize, ResponsiveContainingView, Spacing, Stack, Text, TextAlignment } from '@kibalabs/ui-react';
 
-import { SponsorView } from '../components/Sponsors';
 import { useGlobals } from '../globalsContext';
 
 export const TokenPage = (): React.ReactElement => {
@@ -35,7 +34,6 @@ export const TokenPage = (): React.ReactElement => {
         <Stack.Item growthFactor={1} shrinkFactor={1}>
           <Spacing variant={PaddingSize.Wide2} />
         </Stack.Item>
-        <SponsorView />
       </Stack>
     </ResponsiveContainingView>
   );
