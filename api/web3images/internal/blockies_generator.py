@@ -77,7 +77,7 @@ class Color:
 
     @property
     def hexRgb(self):
-        return ''.join('{:02x}'.format(math.floor(c * 256)) for c in self.numericRgb)
+        return ''.join('{:02x}'.format(math.floor(c * 256)) for c in self.numericRgb)  # pylint: disable=consider-using-f-string
 
     @property
     def hls(self):
@@ -97,8 +97,7 @@ class BlockiesGenerator:
             rowPart = row[0: mirrorWidth]
             rowPart.reverse()
             row.extend(rowPart)
-            for index, _ in enumerate(row):
-                imageData.append(row[index])
+            imageData += row
         return imageData
 
     def create_png_for_eth_address(self, address: str) -> Image:
