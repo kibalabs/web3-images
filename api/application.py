@@ -1,38 +1,50 @@
-import logging
 import os
 
+from core import logging
 from core.api.health import create_api as create_health_api
-from core.aws_requester import AwsRequester
 from core.web3.eth_client import RestEthClient
-from databases import Database
+from core.store.database import Database
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from core.util.value_holder import RequestIdHolder
+from core.http.basic_authentication import BasicAuthentication
+from core.requester import Requester
 
 from web3images.api.api_v1 import create_api as create_v1_api
 from web3images.internal.blockies_generator import BlockiesGenerator
 from web3images.manager import Web3ImagesManager
 from web3images.store.retriever import Retriever
 
-logging.basicConfig(level=logging.INFO)
+requestIdHolder = RequestIdHolder()
+name = os.environ.get('NAME', 'notd-api')
+version = os.environ.get('VERSION', 'local')
+environment = os.environ.get('ENV', 'dev')
+isRunningDebugMode = environment == 'dev'
 
-database = Database(f'postgresql://{os.environ["DB_USERNAME"]}:{os.environ["DB_PASSWORD"]}@{os.environ["DB_HOST"]}:{os.environ["DB_PORT"]}/{os.environ["DB_NAME"]}')
+if isRunningDebugMode:
+    logging.init_basic_logging()
+else:
+    logging.init_json_logging(name=name, version=version, environment=environment, requestIdHolder=requestIdHolder)
+
+ethNodeUsername = os.environ["ETH_NODE_USERNAME"]
+ethNodePassword = os.environ["ETH_NODE_PASSWORD"]
+ethNodeUrl = os.environ["ETH_NODE_URL"]
+
+databaseConnectionString = Database.create_psql_connection_string(username=os.environ["DB_USERNAME"], password=os.environ["DB_PASSWORD"], host=os.environ["DB_HOST"], port=os.environ["DB_PORT"], name=os.environ["DB_NAME"])
+database = Database(connectionString=databaseConnectionString)
 retriever = Retriever(database=database)
 
-awsRequester = AwsRequester(accessKeyId=os.environ['AWS_KEY'], accessKeySecret=os.environ['AWS_SECRET'])
-ethClient = RestEthClient(url='https://nd-foldvvlb25awde7kbqfvpgvrrm.ethereum.managedblockchain.eu-west-1.amazonaws.com', requester=awsRequester)
+ethNodeAuth = BasicAuthentication(username=ethNodeUsername, password=ethNodePassword)
+ethNodeRequester = Requester(headers={'Authorization': f'Basic {ethNodeAuth.to_string()}'})
+ethClient = RestEthClient(url=ethNodeUrl, requester=ethNodeRequester)
 blockiesGenerator = BlockiesGenerator()
 
 web3ImagesManager = Web3ImagesManager(retriever=retriever, ethClient=ethClient, blockiesGenerator=blockiesGenerator)
 
 app = FastAPI()
-app.include_router(router=create_health_api(name=os.environ.get('NAME', 'web3images'), version=os.environ.get('VERSION')))
+app.include_router(router=create_health_api(name=name, version=version, environment=environment))
 app.include_router(prefix='/v1', router=create_v1_api(web3ImagesManager=web3ImagesManager))
-app.add_middleware(CORSMiddleware, allow_credentials=True, allow_methods=['*'], allow_headers=['*'], expose_headers=[
-    'X-Response-Time',
-    'X-Server',
-    'X-Server-Version',
-    'X-Kiba-Token',
-], allow_origins=[
+app.add_middleware(CORSMiddleware, allow_credentials=True, allow_methods=['*'], allow_headers=['*'], expose_headers=['*'], allow_origins=[
     'https://web3-images.kibalabs.com',
     'http://localhost:3000',
 ])
@@ -44,3 +56,4 @@ async def startup():
 @app.on_event('shutdown')
 async def shutdown():
     await database.disconnect()
+    await ethNodeRequester.close_connections()
