@@ -2,6 +2,10 @@ import os
 
 from core import logging
 from core.api.health import create_api as create_health_api
+from core.api.middleware.database_connection_middleware import DatabaseConnectionMiddleware
+from core.api.middleware.exception_handling_middleware import ExceptionHandlingMiddleware
+from core.api.middleware.logging_middleware import LoggingMiddleware
+from core.api.middleware.server_headers_middleware import ServerHeadersMiddleware
 from core.web3.eth_client import RestEthClient
 from core.store.database import Database
 from fastapi import FastAPI
@@ -44,6 +48,10 @@ web3ImagesManager = Web3ImagesManager(retriever=retriever, ethClient=ethClient, 
 app = FastAPI()
 app.include_router(router=create_health_api(name=name, version=version, environment=environment))
 app.include_router(prefix='/v1', router=create_v1_api(web3ImagesManager=web3ImagesManager))
+app.add_middleware(ExceptionHandlingMiddleware)
+app.add_middleware(ServerHeadersMiddleware, name=name, version=version, environment=environment)
+app.add_middleware(LoggingMiddleware, requestIdHolder=requestIdHolder)
+app.add_middleware(DatabaseConnectionMiddleware, database=database)
 app.add_middleware(CORSMiddleware, allow_credentials=True, allow_methods=['*'], allow_headers=['*'], expose_headers=['*'], allow_origins=[
     'https://web3-images.kibalabs.com',
     'http://localhost:3000',

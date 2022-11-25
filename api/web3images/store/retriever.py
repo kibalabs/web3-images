@@ -12,8 +12,9 @@ class Retriever(CoreRetriever):
         query = TokenMetadataTable.select() \
             .where(TokenMetadataTable.c.registryAddress == registryAddress) \
             .where(TokenMetadataTable.c.tokenId == tokenId)
-        row = await self.database.fetch_one(query=query)
+        result = await self.database.execute(query=query)
+        row = result.mappings().first()
         if not row:
-            raise NotFoundException(message=f'TokenMetadata with registry {registryAddress} tokenId {tokenId} not found')
-        tokenMetdata = token_metadata_from_row(row)
-        return tokenMetdata
+            raise NotFoundException(message=f'TokenMetadata with registry:{registryAddress} tokenId:{tokenId} not found')
+        tokenMetadata = token_metadata_from_row(row)
+        return tokenMetadata
