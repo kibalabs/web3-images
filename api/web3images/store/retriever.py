@@ -15,6 +15,6 @@ class Retriever(CoreRetriever):
         result = await self.database.execute(query=query)
         row = result.mappings().first()
         if not row:
-            raise NotFoundException(message=f'TokenOwnership with registry:{registryAddress} tokenId:{tokenId} not found')
+            raise NotFoundException(message=f'TokenMetadata with registry:{registryAddress} tokenId:{tokenId} not found')
         tokenMetadata = token_metadata_from_row(row)
         return tokenMetadata
