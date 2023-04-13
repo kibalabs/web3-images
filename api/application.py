@@ -52,10 +52,7 @@ app.add_middleware(ExceptionHandlingMiddleware)
 app.add_middleware(ServerHeadersMiddleware, name=name, version=version, environment=environment)
 app.add_middleware(LoggingMiddleware, requestIdHolder=requestIdHolder)
 app.add_middleware(DatabaseConnectionMiddleware, database=database)
-app.add_middleware(CORSMiddleware, allow_credentials=True, allow_methods=['*'], allow_headers=['*'], expose_headers=['*'], allow_origins=[
-    'https://web3-images.kibalabs.com',
-    'http://localhost:3000',
-])
+app.add_middleware(CORSMiddleware, allow_credentials=True, allow_methods=['*'], allow_headers=['*'], expose_headers=['*'], allow_origins=['*'])
 
 @app.on_event('startup')
 async def startup():
